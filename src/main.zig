@@ -2,9 +2,10 @@ const c = @import("c.zig");
 const Graphics = @import("Graphics.zig");
 
 /// Should the second paddle be controlled by the computer?
-const p2_use_ai = true;
+const p1_use_ai = true;
 const p1_up_key = c.SDL_SCANCODE_W;
 const p1_down_key = c.SDL_SCANCODE_S;
+const p2_use_ai = true;
 const p2_up_key = c.SDL_SCANCODE_UP;
 const p2_down_key = c.SDL_SCANCODE_DOWN;
 
@@ -53,20 +54,32 @@ const Paddle = struct {
 
 fn tick() void {
     const keys = c.SDL_GetKeyboardState(null);
-    if (keys[p1_up_key] != 0) {
-        paddle1.dy = -Paddle.speed;
-    } else if (keys[c.SDL_SCANCODE_S] != 0) {
-        paddle1.dy = Paddle.speed;
+    if (p1_use_ai) {
+        if (ball.dx < 0) {
+            if (paddle1.y + Paddle.height / 2 < ball.y + Ball.size / 2) {
+                paddle1.dy = Ball.speed;
+            } else {
+                paddle1.dy = -Ball.speed;
+            }
+        } else {
+            paddle1.dy = 0;
+        }
     } else {
-        paddle1.dy = 0;
+        if (keys[p1_up_key] != 0) {
+            paddle1.dy = -Paddle.speed;
+        } else if (keys[c.SDL_SCANCODE_S] != 0) {
+            paddle1.dy = Paddle.speed;
+        } else {
+            paddle1.dy = 0;
+        }
     }
 
     if (p2_use_ai) {
         if (ball.dx > 0) {
             if (paddle2.y + Paddle.height / 2 < ball.y + Ball.size / 2) {
-                paddle2.dy = Paddle.speed;
+                paddle2.dy = Ball.speed;
             } else {
-                paddle2.dy = -Paddle.speed;
+                paddle2.dy = -Ball.speed;
             }
         } else {
             paddle2.dy = 0;
