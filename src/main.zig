@@ -138,18 +138,19 @@ fn drawDigit(d: u4, x: i32, y: i32) void {
     const size = 10;
     for (0..5) |row| {
         for (0..3) |col| {
-            if (digits[d] & (@as(u16, 1) << @intCast(u4, row * 3 + col)) != 0) {
-                gfx.fillRect(x + @intCast(i32, col) * size, y + @intCast(i32, row) * size, size, size);
+            const i: u4 = @intCast(row * 3 + col);
+            if (digits[d] >> i & 1 != 0) {
+                gfx.fillRect(x + @as(i32, @intCast(col)) * size, y + @as(i32, @intCast(row)) * size, size, size);
             }
         }
     }
 }
 
 fn drawScores() void {
-    drawDigit(@intCast(u4, p1_score / 10), Graphics.width / 4 - 20, 10);
-    drawDigit(@intCast(u4, p1_score % 10), Graphics.width / 4 + 20, 10);
-    drawDigit(@intCast(u4, p2_score / 10), 3 * Graphics.width / 4 - 20, 10);
-    drawDigit(@intCast(u4, p2_score % 10), 3 * Graphics.width / 4 + 20, 10);
+    drawDigit(@intCast(p1_score / 10), Graphics.width / 4 - 20, 10);
+    drawDigit(@intCast(p1_score % 10), Graphics.width / 4 + 20, 10);
+    drawDigit(@intCast(p2_score / 10), 3 * Graphics.width / 4 - 20, 10);
+    drawDigit(@intCast(p2_score % 10), 3 * Graphics.width / 4 + 20, 10);
 }
 
 fn drawCenterLine() void {

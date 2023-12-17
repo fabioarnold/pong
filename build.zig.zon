@@ -1,10 +1,17 @@
 .{
     .name = "pong",
     .version = "1.0.0",
+    .paths = .{
+        "src",
+        "build.zig",
+        "build.zig.zon",
+        "LICENSE",
+        "README.md",
+    },
     .dependencies = .{
         .sdl = .{
-            .url = "https://github.com/andrewrk/SDL/archive/aef95740310154ebd491bc35e0fdcd118b16ade0.tar.gz",
-            .hash = "12202e4412ade6d1b8c45a606fc83cfa242a0ac47a70578aef9d5fa3b0bb33ab5618",
+            .url = "https://github.com/andrewrk/SDL/archive/3eb87f0f5b8d815d5a608b732e1d77f0876712d9.tar.gz",
+            .hash = "122006f1d25dd112605ad00929f05e05da844decd4bc25996998814704344be87a09",
         },
     },
 }

@@ -8,4 +8,4 @@
 $ zig build run
 ```
 
-Tested with [Zig](https://ziglang.org) version `0.11.0-dev.2939+289234744`.
+Tested with [Zig](https://ziglang.org) version `0.12.0-dev.1830+779b8e259`.
